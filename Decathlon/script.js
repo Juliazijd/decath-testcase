@@ -640,11 +640,6 @@ function sum(array) {
     return total;
 }
 function totalStockQuantity(data) { return sum(getStockQuantity(data).map(Number)); }
-function displayStockQuantity (data) {
-    const stockQuantity = document.querySelector('#buying-zone__stock-quantity');
-    stockQuantity.innerHTML = data;
-}
-displayStockQuantity(totalStockQuantity(fakeData));
 
 // Script to display total amount of stores which have the product in stock.
 function totalInStockStores(data) { 
@@ -653,8 +648,14 @@ function totalInStockStores(data) {
 		});
 	return (result.length);
 }
-function displayInStockStores (data) {
-    const storesInStock = document.querySelector('#buying-zone__stores-instock');
-    storesInStock.innerHTML = data;
+
+function displayStockQuantityAndStores (data) {
+    const storesInStock = document.querySelector('.buying-zone__select-store');
+    storesInStock.innerHTML = 
+			`<a href="#">
+            Er zijn nog ${totalStockQuantity(data)} stuks op voorraad in 
+        	${totalInStockStores(data)} winkels.
+        	</a>`;
 }
-displayInStockStores(totalInStockStores(fakeData));
+
+displayStockQuantityAndStores(fakeData);
